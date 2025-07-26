@@ -1,16 +1,25 @@
-# spa_booking_app
+# Spa Booking App (Flutter)
 
-A new Flutter project.
+A modern Flutter application built for spa and wellness service bookings. This app follows Clean Architecture principles and implements BLoC for state management. All content and images used are dummy placeholders for development and UI prototyping purposes.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Location permission onboarding screen
+- Home screen with spa listings
+- Spa detail view with services
+- Cart functionality for booking
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Architecture and Tech Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Structured using Clean Architecture and BLoC
+
+Technology | Purpose
+-----------|---------
+Flutter | UI framework
+BLoC | State management
+GetIt | Dependency injection
+flutter_screenutil | Responsive design
+Clean Architecture | Scalable and maintainable structure
+Material Design | Consistent UI styling
+
