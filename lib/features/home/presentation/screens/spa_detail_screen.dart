@@ -110,15 +110,19 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
       top: 40,
       left: 16,
       child: Container(
-        decoration: BoxDecoration(gradient: const LinearGradient(
+      
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          gradient:  LinearGradient(
                 begin: Alignment.centerLeft,
                 colors: [
-                  AppColors.secondaryGradient,
-                  AppColors.primaryGradient,
+                  AppColors.secondaryGradient.withOpacity(.3),
+                  AppColors.secondaryGradient.withOpacity(.3),
+                 // AppColors.primaryGradient.withOpacity(.8),
                 ],
               )),
         child: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
+          icon: const Icon(Icons.arrow_back_ios_new,color: Colors.black,),
           onPressed: () => Navigator.pop(context),
         ),
       ),
