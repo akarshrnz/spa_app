@@ -1,174 +1,246 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:spa_booking_app/core/navigation/app_navigator.dart';
 import 'package:spa_booking_app/core/theme/app_colors.dart';
-import 'package:spa_booking_app/core/theme/app_text_styles.dart';
 import 'package:spa_booking_app/core/common_widgets/gradient_button.dart';
 
-class BookingConfirmationDialog extends StatelessWidget {
-  const BookingConfirmationDialog({super.key});
+class BookingConfirmationDialog
+    extends
+        StatelessWidget {
+  const BookingConfirmationDialog({
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Dialog(
       backgroundColor: Colors.transparent,
-      insetPadding: const EdgeInsets.all(24),
+      insetPadding: EdgeInsets.all(
+        24.w,
+      ),
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(
+          24.w,
+        ),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(
+            24.r,
+          ),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Success icon
             Container(
-                                   padding: const EdgeInsets.all(10),
-
-                decoration:  BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [AppColors.secondaryGradient.withOpacity(.2), AppColors.primaryGradient.withOpacity(.2)],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+              padding: EdgeInsets.all(
+                10.w,
+              ),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    AppColors.secondaryGradient.withOpacity(
+                      .2,
                     ),
-                  ),
+                    AppColors.primaryGradient.withOpacity(
+                      .2,
+                    ),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
               child: Container(
-                                  padding: const EdgeInsets.all(10),
-
-                decoration:  BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [AppColors.secondaryGradient.withOpacity(.4), AppColors.primaryGradient.withOpacity(.4)],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
+                padding: EdgeInsets.all(
+                  10.w,
+                ),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.secondaryGradient.withOpacity(
+                        .4,
+                      ),
+                      AppColors.primaryGradient.withOpacity(
+                        .4,
+                      ),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
                   ),
+                ),
                 child: Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: EdgeInsets.all(
+                    20.w,
+                  ),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
-                      colors: [AppColors.secondaryGradient, AppColors.primaryGradient],
+                      colors: [
+                        AppColors.secondaryGradient,
+                        AppColors.primaryGradient,
+                      ],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                     ),
                   ),
-                  child: const Icon(Icons.check_rounded, size: 55, color: Colors.white),
+                  child: Icon(
+                    Icons.check_rounded,
+                    size: 55.sp,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(
+              height: 20.h,
+            ),
 
-            // Title
-            const Text(
+            Text(
               'Your Service Booking is Confirmed!',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 17,
+                fontSize: 17.sp,
                 fontWeight: FontWeight.w600,
                 color: AppColors.primary,
               ),
             ),
-            const SizedBox(height: 12),
-
-            // Description
-          Text.rich(
-  TextSpan(
-    children: [
-      const TextSpan(
-        text: 'Thank you for choosing Oasis Spa Haven. Your appointment for ',
-        style: TextStyle(
-          fontSize: 14,
-          height: 1.4,
-          fontWeight: FontWeight.w400,
-          color: AppColors.secondary,
-        ),
-      ),
-      WidgetSpan(
-        alignment: PlaceholderAlignment.middle,
-        child: ShaderMask(
-          shaderCallback: (bounds) => const LinearGradient(
-            colors: [Color(0xFFD6A76C), Color(0xFF9F7437)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ).createShader(bounds),
-          child: const Text(
-            'Swedish Massage',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.white, // required to show gradient via ShaderMask
+            SizedBox(
+              height: 12.h,
             ),
-          ),
-        ),
-      ),
-    
-      WidgetSpan(
-        alignment: PlaceholderAlignment.middle,
-        child: ShaderMask(
-          shaderCallback: (bounds) => const LinearGradient(
-            colors: [Color(0xFFD6A76C), Color(0xFF9F7437)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ).createShader(bounds),
-          child: const Text(
-            'and Hot Stone Massage',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
-      const TextSpan(
-        text: ' has been successfully booked.',
-        style: TextStyle(
-          fontSize: 14,
-          height: 1.4,
-          fontWeight: FontWeight.w400,
-          color: AppColors.secondary,
-        ),
-      ),
-    ],
-  ),
-  textAlign: TextAlign.center,
-)
-,
-            const SizedBox(height: 20),
 
-            // Appointment info
+            Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Thank you for choosing Oasis Spa Haven. Your appointment for ',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      height: 1.4,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.secondary,
+                    ),
+                  ),
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.middle,
+                    child: ShaderMask(
+                      shaderCallback:
+                          (
+                            bounds,
+                          ) =>
+                              const LinearGradient(
+                                colors: [
+                                  Color(
+                                    0xFFD6A76C,
+                                  ),
+                                  Color(
+                                    0xFF9F7437,
+                                  ),
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ).createShader(
+                                bounds,
+                              ),
+                      child: Text(
+                        'Swedish Massage',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.middle,
+                    child: ShaderMask(
+                      shaderCallback:
+                          (
+                            bounds,
+                          ) =>
+                              const LinearGradient(
+                                colors: [
+                                  Color(
+                                    0xFFD6A76C,
+                                  ),
+                                  Color(
+                                    0xFF9F7437,
+                                  ),
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ).createShader(
+                                bounds,
+                              ),
+                      child: Text(
+                        'and Hot Stone Massage',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  TextSpan(
+                    text: ' has been successfully booked.',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      height: 1.4,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.secondary,
+                    ),
+                  ),
+                ],
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: EdgeInsets.symmetric(
+                horizontal: 16.w,
+                vertical: 12.h,
+              ),
               decoration: BoxDecoration(
                 color: AppColors.checkoutBar,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(
+                  12.r,
+                ),
               ),
-              child: const Text(
+              child: Text(
                 'Your appointment on Thursday, 7 Mar 2024\nat 8:00 AM',
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
                   color: AppColors.primary,
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(
+              height: 20.h,
+            ),
 
-            // Done button
             SizedBox(
               width: double.infinity,
               child: GradientButton(
-                gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                  colors:[
-                  AppColors.secondaryGradient,
-                  AppColors.primaryGradient,
-                ]),
-                radius: 16,
+                gradient: const LinearGradient(
+                  begin: Alignment.centerLeft,
+                  colors: [
+                    AppColors.secondaryGradient,
+                    AppColors.primaryGradient,
+                  ],
+                ),
+                radius: 16.r,
                 onTap: () {
-                 Navigator.pop(context);
+                  AppNavigator.pop();
                 },
                 title: "Done",
               ),

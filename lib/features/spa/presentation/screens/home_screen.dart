@@ -1,30 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spa_booking_app/core/app_image.dart';
+import 'package:spa_booking_app/core/navigation/app_navigator.dart';
+import 'package:spa_booking_app/core/navigation/app_routes.dart';
 import 'package:spa_booking_app/core/theme/app_colors.dart';
 import 'package:spa_booking_app/core/theme/app_text_styles.dart';
 import 'package:spa_booking_app/features/spa/presentation/screens/spa_detail_screen.dart';
 import 'package:spa_booking_app/features/spa/presentation/screens/widgets/loaction_selector.dart';
 
-class HomeScreen
-    extends
-        StatelessWidget {
-  const HomeScreen({
-    super.key,
-  });
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
       body: Column(
         children: [
           _buildSearchField(),
-          Expanded(
-            child: _buildSpaList(),
-          ),
+          Expanded(child: _buildSpaList()),
         ],
       ),
     );
@@ -33,41 +27,19 @@ class HomeScreen
   AppBar _buildAppBar() {
     return AppBar(
       backgroundColor: AppColors.background,
+      surfaceTintColor: AppColors.background,
       elevation: 0,
       titleSpacing: 0,
       title: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Row(
           children: [
             LocationSelector(),
-            // const Icon(
-            //   Icons.location_on_outlined,
-            //   color: AppColors.chipSelected,
-            // ),
-            // const SizedBox(
-            //   width: 4,
-            // ),
-            // Text(
-            //   'Madhapur',
-            //   style: AppTextStyles.body.copyWith(
-            //     fontWeight: FontWeight.w600,
-            //   ),
-            // ),
-            // const Icon(
-            //   Icons.keyboard_arrow_down_rounded,
-            //   color: AppColors.secondary,
-            // ),
             const Spacer(),
             Container(
-              padding: const EdgeInsets.all(
-                10,
-              ),
+              padding: EdgeInsets.all(10.w),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  8,
-                ),
+                borderRadius: BorderRadius.circular(8.r),
                 color: AppColors.cardBackground,
               ),
               child: const Icon(
@@ -83,26 +55,17 @@ class HomeScreen
 
   Widget _buildSearchField() {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 12,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       child: TextField(
         decoration: InputDecoration(
           hintText: 'Search Spa, Services...',
           hintStyle: AppTextStyles.body,
-          prefixIcon: const Icon(
-            Icons.search,
-          ),
+          prefixIcon: const Icon(Icons.search),
           filled: true,
           fillColor: Colors.white,
-          contentPadding: const EdgeInsets.symmetric(
-            vertical: 0,
-          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 0.h),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(
-              12,
-            ),
+            borderRadius: BorderRadius.circular(12.r),
             borderSide: BorderSide.none,
           ),
         ),
@@ -112,33 +75,17 @@ class HomeScreen
 
   Widget _buildSpaList() {
     final spas = _getSpaList();
-
     return ListView.builder(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       itemCount: spas.length,
-      itemBuilder:
-          (
-            context,
-            index,
-          ) {
-            final spa = spas[index];
-            return _buildSpaCard(
-              context,
-              spa,
-            );
-          },
+      itemBuilder: (context, index) {
+        final spa = spas[index];
+        return _buildSpaCard(context, spa);
+      },
     );
   }
 
-  List<
-    Map<
-      String,
-      dynamic
-    >
-  >
-  _getSpaList() {
+  List<Map<String, dynamic>> _getSpaList() {
     return [
       {
         'name': 'Renew Day Spa',
@@ -173,90 +120,46 @@ class HomeScreen
     ];
   }
 
-  Widget _buildSpaCard(
-    BuildContext context,
-    Map<
-      String,
-      dynamic
-    >
-    spa,
-  ) {
+  Widget _buildSpaCard(BuildContext context, Map<String, dynamic> spa) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder:
-                (
-                  _,
-                ) => const SpaDetailScreen(),
-          ),
-        );
+         AppNavigator.push(
+                      AppRoutes.spaDetails,
+                    );
       },
       child: Container(
-        margin: const EdgeInsets.only(
-          bottom: 16,
-        ),
+        margin: EdgeInsets.only(bottom: 16.h),
+        padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
           color: AppColors.cardBackground,
-          borderRadius: BorderRadius.circular(
-            16,
-          ),
-        ),
-        padding: const EdgeInsets.all(
-          12,
+          borderRadius: BorderRadius.circular(16.r),
         ),
         child: Column(
           children: [
-            _buildSpaCardHeader(
-              spa,
-            ),
-            if (spa['offer'] ==
-                true)
-              _buildOfferSection(),
+            _buildSpaCardHeader(spa),
+            if (spa['offer'] == true) _buildOfferSection(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSpaCardHeader(
-    Map<
-      String,
-      dynamic
-    >
-    spa,
-  ) {
+  Widget _buildSpaCardHeader(Map<String, dynamic> spa) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        _buildSpaImage(
-          spa,
-        ),
-        SizedBox(
-          width: 10.w,
-        ),
-        _buildSpaDetails(
-          spa,
-        ),
+        _buildSpaImage(spa),
+        SizedBox(width: 10.w),
+        _buildSpaDetails(spa),
       ],
     );
   }
 
-  Widget _buildSpaImage(
-    Map<
-      String,
-      dynamic
-    >
-    spa,
-  ) {
+  Widget _buildSpaImage(Map<String, dynamic> spa) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(
-        12.r,
-      ),
+      borderRadius: BorderRadius.circular(12.r),
       child: Image.network(
-        spa['image']!.toString(),
+        spa['image'].toString(),
         width: 88.w,
         height: 110.h,
         fit: BoxFit.cover,
@@ -264,30 +167,17 @@ class HomeScreen
     );
   }
 
-  Widget _buildSpaDetails(
-    Map<
-      String,
-      dynamic
-    >
-    spa,
-  ) {
+  Widget _buildSpaDetails(Map<String, dynamic> spa) {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          _buildSpaTitleAndFavorite(
-            spa,
-          ),
-          const SizedBox(
-            height: 4,
-          ),
+          _buildSpaTitleAndFavorite(spa),
+          SizedBox(height: 4.h),
           _buildSpaAddress(),
-          const SizedBox(
-            height: 4,
-          ),
+          SizedBox(height: 4.h),
           Text(
-            spa['type']!.toString(),
+            spa['type'].toString(),
             style: AppTextStyles.cardSubText,
           ),
           _buildRatingAndDistance(),
@@ -296,28 +186,20 @@ class HomeScreen
     );
   }
 
-  Widget _buildSpaTitleAndFavorite(
-    Map<
-      String,
-      dynamic
-    >
-    spa,
-  ) {
+  Widget _buildSpaTitleAndFavorite(Map<String, dynamic> spa) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Flexible(
           child: Text(
-            spa['name']!.toString(),
+            spa['name'].toString(),
             style: AppTextStyles.cardTitle,
             maxLines: 1,
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(
-            left: 5,
-          ),
-          child: Icon(
+        Padding(
+          padding: EdgeInsets.only(left: 5.w),
+          child: const Icon(
             Icons.favorite,
             color: AppColors.chipSelected,
           ),
@@ -329,14 +211,8 @@ class HomeScreen
   Widget _buildSpaAddress() {
     return Row(
       children: [
-        Image.asset(
-          AppImage.shop,
-          width: 14,
-          height: 14,
-        ),
-        const SizedBox(
-          width: 4,
-        ),
+        Image.asset(AppImage.shop, width: 14.w, height: 14.h),
+        SizedBox(width: 4.w),
         Expanded(
           child: Text(
             '1208, Spline Arcade, Flat No 102...',
@@ -351,38 +227,18 @@ class HomeScreen
   Widget _buildRatingAndDistance() {
     return Row(
       children: [
-        const Icon(
-          Icons.star,
-          size: 16,
-          color: AppColors.ratingStar,
-        ),
-        const SizedBox(
-          width: 4,
-        ),
-        const Text(
+        const Icon(Icons.star, size: 16, color: AppColors.ratingStar),
+        SizedBox(width: 4.w),
+        Text(
           '4.5',
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
+          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
         ),
-        const SizedBox(
-          width: 12,
-        ),
-        Image.asset(
-          AppImage.roundLocationIcon,
-          width: 14,
-          height: 14,
-        ),
-        const SizedBox(
-          width: 4,
-        ),
-        const Text(
+        SizedBox(width: 12.w),
+        Image.asset(AppImage.roundLocationIcon, width: 14.w, height: 14.h),
+        SizedBox(width: 4.w),
+        Text(
           '3.5 km',
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
+          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
         ),
       ],
     );
@@ -391,27 +247,16 @@ class HomeScreen
   Widget _buildOfferSection() {
     return Column(
       children: [
-        const SizedBox(
-          height: 8,
-        ),
-        Container(
-          alignment: Alignment.centerLeft,
-          child: Row(
-            children: [
-              Image.asset(
-                AppImage.offer,
-                width: 14,
-                height: 14,
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Text(
-                'Flat 10% Off above value of 200',
-                style: AppTextStyles.offerText,
-              ),
-            ],
-          ),
+        SizedBox(height: 8.h),
+        Row(
+          children: [
+            Image.asset(AppImage.offer, width: 14.w, height: 14.h),
+            SizedBox(width: 5.w),
+            Text(
+              'Flat 10% Off above value of 200',
+              style: AppTextStyles.offerText,
+            ),
+          ],
         ),
       ],
     );

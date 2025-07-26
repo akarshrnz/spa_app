@@ -1,8 +1,10 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:spa_booking_app/core/app_image.dart';
+import 'package:spa_booking_app/core/navigation/app_navigator.dart';
+import 'package:spa_booking_app/core/navigation/app_routes.dart';
 import 'package:spa_booking_app/core/theme/app_colors.dart';
 import 'package:spa_booking_app/core/theme/app_text_styles.dart';
 import 'package:spa_booking_app/features/cart/presentation/screens/cart_screen.dart';
@@ -10,7 +12,6 @@ import 'package:spa_booking_app/core/common_widgets/gradients/GradientBoxBorder.
 import 'package:spa_booking_app/core/common_widgets/gradients/gradeint_circle.dart';
 import 'package:spa_booking_app/core/common_widgets/dotted_line.dart';
 import 'package:spa_booking_app/core/common_widgets/gradient_button.dart';
-
 
 class SpaDetailScreen extends StatefulWidget {
   const SpaDetailScreen({super.key});
@@ -20,14 +21,7 @@ class SpaDetailScreen extends StatefulWidget {
 }
 
 class _SpaDetailScreenState extends State<SpaDetailScreen> {
-  final List<String> filters = [
-    'All',
-    'Home-visit',
-    'Walk-in',
-    'Male',
-    'Female',
-  ];
-  
+  final List<String> filters = ['All', 'Home-visit', 'Walk-in', 'Male', 'Female'];
   String selectedFilter = 'All';
   final Set<String> selectedServices = {'Swedish Massage'};
 
@@ -64,39 +58,36 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
         children: [
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 80),
+              padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 80.h),
               children: [
                 _buildSpaInfoCard(),
-                const SizedBox(height: 12),
+                SizedBox(height: 12.h),
                 _buildChips(),
-                const SizedBox(height: 20),
-                _buildServiceSection(
-                  'Massage Therapy',
-                  [
-                    _buildServiceTile(
-                      title: 'Swedish Massage',
-                      price: '₹4,000',
-                      duration: '60 Mins',
-                      type: 'Walkin',
-                      image: AppImage.humanLogo,
-                    ),
-                    _buildServiceTile(
-                      title: 'Deep Tissue Massage',
-                      price: '₹6,200',
-                      duration: '60 Mins',
-                      type: 'Walkin',
-                      image: AppImage.femaleLogo,
-                    ),
-                    _buildServiceTile(
-                      title: 'Hot Stone Massage',
-                      price: '₹8,500',
-                      duration: '60 Mins',
-                      type: 'Homevisit',
-                      image: AppImage.maleLogo,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
+                SizedBox(height: 20.h),
+                _buildServiceSection('Massage Therapy', [
+                  _buildServiceTile(
+                    title: 'Swedish Massage',
+                    price: '₹4,000',
+                    duration: '60 Mins',
+                    type: 'Walkin',
+                    image: AppImage.humanLogo,
+                  ),
+                  _buildServiceTile(
+                    title: 'Deep Tissue Massage',
+                    price: '₹6,200',
+                    duration: '60 Mins',
+                    type: 'Walkin',
+                    image: AppImage.femaleLogo,
+                  ),
+                  _buildServiceTile(
+                    title: 'Hot Stone Massage',
+                    price: '₹8,500',
+                    duration: '60 Mins',
+                    type: 'Homevisit',
+                    image: AppImage.maleLogo,
+                  ),
+                ]),
+                SizedBox(height: 12.h),
                 _buildServiceSection('Hair Cut Wash & Style', []),
                 _buildServiceSection('Nail Bar', []),
               ],
@@ -109,77 +100,69 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
 
   Widget _buildBackButton() {
     return Positioned(
-      top: 40,
-      left: 16,
+      top: 40.h,
+      left: 16.w,
       child: GestureDetector(
-      onTap:  () => Navigator.pop(context),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Container(
-            height: 48,
-            width: 48,
-            decoration: BoxDecoration(
-              color: const Color(0xCCD6CDBE), 
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Center(
-              child: Icon(
-                Icons.arrow_back_ios_new,
-                size: 22,
-                color: Colors.black,
+        onTap: () => AppNavigator.pop(),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16.r),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              height: 48.h,
+              width: 48.w,
+              decoration: BoxDecoration(
+                color: const Color(0xCCD6CDBE),
+                borderRadius: BorderRadius.circular(16.r),
+              ),
+              child: const Center(
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  size: 22,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
         ),
       ),
-    ),
     );
   }
 
   Widget _buildBottomBar() {
     return Positioned(
-      bottom: 10,
-      left: 10,
-      right: 10,
+      bottom: 10.h,
+      left: 10.w,
+      right: 10.w,
       child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         decoration: BoxDecoration(
           color: AppColors.cardBackground,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 6,
-              offset: Offset(0, 3),
-          )],
+            BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3)),
+          ],
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               '${selectedServices.length} Services added',
-              style: AppTextStyles.cardSubText.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+              style: AppTextStyles.cardSubText.copyWith(fontWeight: FontWeight.w600),
             ),
             GradientButton(
-              height: 48,
-              width: 150,
+              height: 48.h,
+              width: 150.w,
               gradient: const LinearGradient(
                 begin: Alignment.centerLeft,
-                colors: [
-                  AppColors.secondaryGradient,
-                  AppColors.primaryGradient,
-                ],
+                colors: [AppColors.secondaryGradient, AppColors.primaryGradient],
               ),
-              radius: 16,
+              radius: 16.r,
               onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => const CartScreen()),
-                );
+                 AppNavigator.push(
+                      AppRoutes.cart,
+                    );
+             
               },
               title: "Check out",
             ),
@@ -191,25 +174,21 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
 
   Widget _buildSpaInfoCard() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: AppColors.cardBackground,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 6,
-            offset: Offset(0, 3),
-          ),
+          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3)),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildSpaHeader(),
-          const SizedBox(height: 10),
+          SizedBox(height: 10.h),
           _buildDivider(),
-          const SizedBox(height: 10),
+          SizedBox(height: 10.h),
           _buildOfferCard(),
         ],
       ),
@@ -219,31 +198,26 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
   Widget _buildSpaHeader() {
     return Row(
       children: [
-        const CircleAvatar(
+        CircleAvatar(
+          radius: 20.r,
           backgroundColor: Colors.red,
-          child: Text(
-            'H',
-            style: TextStyle(color: Colors.white),
-          ),
+          child: Text('H', style: TextStyle(color: Colors.white, fontSize: 14.sp)),
         ),
-        const SizedBox(width: 12),
+        SizedBox(width: 12.w),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Oasis Spa Haven',
-              style: AppTextStyles.cardTitle,
-            ),
-            const SizedBox(height: 4),
+            Text('Oasis Spa Haven', style: AppTextStyles.cardTitle),
+            SizedBox(height: 4.h),
             Row(
               children: [
-                Image.asset(AppImage.shopColor, width: 20, height: 20),
+                Image.asset(AppImage.shopColor, width: 20.w, height: 20.h),
                 Text(' Madhapur', style: AppTextStyles.cardSubText),
-                const SizedBox(width: 12),
-                Image.asset(AppImage.roundLocationIconColor, width: 20, height: 20),
+                SizedBox(width: 12.w),
+                Image.asset(AppImage.roundLocationIconColor, width: 20.w, height: 20.h),
                 Text(' 3.5 km', style: AppTextStyles.cardSubText),
-                const SizedBox(width: 12),
-                Image.asset(AppImage.star, width: 20, height: 20),
+                SizedBox(width: 12.w),
+                Image.asset(AppImage.star, width: 20.w, height: 20.h),
                 Text(' 4.5', style: AppTextStyles.cardSubText),
               ],
             ),
@@ -255,7 +229,7 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
 
   Widget _buildDivider() {
     return DottedLine(
-      space: 5,
+      space: 5.w,
       color: AppColors.primaryGradient.withOpacity(.5),
     );
   }
@@ -263,27 +237,21 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
   Widget _buildOfferCard() {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         color: AppColors.cardBackground,
-        border: Border.all(width: 2, color: const Color(0xFFF0F0F0)),
+        border: Border.all(width: 2.w, color: const Color(0xFFF0F0F0)),
       ),
       child: Row(
         children: [
-          Image.asset(AppImage.offer, width: 32, height: 30),
-          const SizedBox(width: 10),
+          Image.asset(AppImage.offer, width: 32.w, height: 30.h),
+          SizedBox(width: 10.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Use code DSaloon',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-              const Text(
-                'Get ₹500 off on orders above 100/-',
-                style: AppTextStyles.cardSubText,
-              ),
+              Text('Use code DSaloon', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp)),
+              Text('Get ₹500 off on orders above 100/-', style: AppTextStyles.cardSubText),
             ],
           ),
         ],
@@ -293,29 +261,26 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
 
   Widget _buildChips() {
     return SizedBox(
-      height: 36,
+      height: 36.h,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: filters.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        separatorBuilder: (_, __) => SizedBox(width: 8.w),
         itemBuilder: (context, index) {
           final chip = filters[index];
           final isSelected = chip == selectedFilter;
           return GestureDetector(
             onTap: () => setState(() => selectedFilter = chip),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
               alignment: Alignment.center,
-              height: 50,
+              height: 50.h,
               decoration: BoxDecoration(
                 border: isSelected
                     ? null
                     : const GradientBoxBorder(
                         gradient: LinearGradient(
-                          colors: [
-                            AppColors.secondaryGradient,
-                            AppColors.primaryGradient,
-                          ],
+                          colors: [AppColors.secondaryGradient, AppColors.primaryGradient],
                         ),
                         width: 1,
                       ),
@@ -323,29 +288,18 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
                     ? const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.center,
-                        colors: [
-                          AppColors.secondaryGradient,
-                          AppColors.primaryGradient,
-                        ],
+                        colors: [AppColors.secondaryGradient, AppColors.primaryGradient],
                       )
                     : null,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
               ),
               child: isSelected
-                  ? Text(
-                      chip,
-                      style: TextStyle(
-                        color: isSelected ? Colors.white : AppColors.chipText,
-                      ),
-                    )
+                  ? Text(chip, style: TextStyle(color: Colors.white, fontSize: 14.sp))
                   : GradientText(
                       chip,
                       gradientType: GradientType.radial,
                       radius: 2.5,
-                      colors: const [
-                        AppColors.secondaryGradient,
-                        AppColors.primaryGradient,
-                      ],
+                      colors: const [AppColors.secondaryGradient, AppColors.primaryGradient],
                     ),
             ),
           );
@@ -359,24 +313,21 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
           decoration: BoxDecoration(
             color: AppColors.serviceCard,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             border: Border.all(color: Colors.grey.shade200),
           ),
           child: Row(
             children: [
               Text(title, style: AppTextStyles.sectionTitle),
               const Spacer(),
-              const Icon(
-                Icons.keyboard_arrow_up_rounded,
-                color: AppColors.primaryGradient,
-              ),
+              const Icon(Icons.keyboard_arrow_up_rounded, color: AppColors.primaryGradient),
             ],
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.h),
         ...children,
       ],
     );
@@ -392,22 +343,22 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
     final isSelected = selectedServices.contains(title);
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      padding: const EdgeInsets.all(12),
+      margin: EdgeInsets.symmetric(vertical: 6.h),
+      padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: AppColors.serviceCard,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: Colors.grey.shade200),
       ),
       child: Row(
         children: [
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildServiceHeader(title, image),
-                const SizedBox(height: 10),
+                SizedBox(height: 10.h),
                 _buildServiceFooter(price, duration, type, isSelected, title),
               ],
             ),
@@ -424,7 +375,7 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title, style: AppTextStyles.serviceTitle),
-            const SizedBox(height: 4),
+            SizedBox(height: 4.h),
             Text(
               'Experience relaxation and stress relief...',
               style: AppTextStyles.serviceDescription,
@@ -433,36 +384,21 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
         ),
         const Spacer(),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
           decoration: BoxDecoration(
             color: AppColors.cardBackground,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
             boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 6,
-                offset: Offset(0, 3),
-              ),
+              BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3)),
             ],
           ),
-          child: Image.asset(
-            image,
-            fit: BoxFit.cover,
-            height: 28,
-            width: 22,
-          ),
+          child: Image.asset(image, fit: BoxFit.cover, height: 28.h, width: 22.w),
         ),
       ],
     );
   }
 
-  Widget _buildServiceFooter(
-    String price,
-    String duration,
-    String type,
-    bool isSelected,
-    String title,
-  ) {
+  Widget _buildServiceFooter(String price, String duration, String type, bool isSelected, String title) {
     return Row(
       children: [
         Text(price, style: AppTextStyles.priceText),
@@ -478,14 +414,11 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
 
   Widget _buildGradientCircle() {
     return Padding(
-      padding: const EdgeInsets.only(left: 5, right: 5),
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
       child: GradientCircle(
-        size: 5,
-        radius: 2.5,
-        colors: const [
-          AppColors.secondaryGradient,
-          AppColors.primaryGradient,
-        ],
+        size: 5.w,
+        radius: 2.5.w,
+        colors: const [AppColors.secondaryGradient, AppColors.primaryGradient],
       ),
     );
   }
@@ -497,30 +430,24 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
         setState(() {});
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: EdgeInsets.symmetric(horizontal: 12.w),
         alignment: Alignment.center,
-        height: 32,
-        width: 92,
+        height: 32.h,
+        width: 92.w,
         decoration: BoxDecoration(
           border: const GradientBoxBorder(
             gradient: LinearGradient(
-              colors: [
-                AppColors.secondaryGradient,
-                AppColors.primaryGradient,
-              ],
+              colors: [AppColors.secondaryGradient, AppColors.primaryGradient],
             ),
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         child: GradientText(
           "Remove",
           gradientType: GradientType.radial,
           radius: 2.5,
-          colors: const [
-            AppColors.secondaryGradient,
-            AppColors.primaryGradient,
-          ],
+          colors: const [AppColors.secondaryGradient, AppColors.primaryGradient],
         ),
       ),
     );
@@ -528,16 +455,13 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
 
   Widget _buildAddButton(String title) {
     return GradientButton(
-      height: 32,
-      width: 92,
+      height: 32.h,
+      width: 92.w,
       gradient: const LinearGradient(
         begin: Alignment.centerLeft,
-        colors: [
-          AppColors.secondaryGradient,
-          AppColors.primaryGradient,
-        ],
+        colors: [AppColors.secondaryGradient, AppColors.primaryGradient],
       ),
-      radius: 16,
+      radius: 16.r,
       onTap: () {
         selectedServices.add(title);
         setState(() {});

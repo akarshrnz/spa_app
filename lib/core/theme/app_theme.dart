@@ -8,7 +8,6 @@ class AppTheme {
     return ThemeData(
       scaffoldBackgroundColor: AppColors.background,
       primaryColor: AppColors.buttonBackground,
-      //fontFamily: 'SF Pro', // or whatever font is used
       colorScheme: const ColorScheme.light(
         primary: AppColors.primary,
         secondary: AppColors.secondary,
