@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spa_booking_app/core/theme/app_colors.dart';
 import 'package:spa_booking_app/core/theme/app_text_styles.dart';
-import 'package:spa_booking_app/features/home/presentation/screens/widgets/gradient_button.dart';
+import 'package:spa_booking_app/core/common_widgets/gradient_button.dart';
 
 class BookingConfirmationDialog extends StatelessWidget {
   const BookingConfirmationDialog({super.key});

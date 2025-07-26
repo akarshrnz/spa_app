@@ -1,13 +1,15 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:spa_booking_app/core/app_image.dart';
 import 'package:spa_booking_app/core/theme/app_colors.dart';
 import 'package:spa_booking_app/core/theme/app_text_styles.dart';
-import 'package:spa_booking_app/features/home/presentation/screens/cart_screen.dart';
-import 'package:spa_booking_app/features/home/presentation/screens/gradients/GradientBoxBorder.dart';
-import 'package:spa_booking_app/features/home/presentation/screens/gradients/gradeint_circle.dart';
-import 'package:spa_booking_app/features/home/presentation/screens/widgets/dotted_line.dart';
-import 'package:spa_booking_app/features/home/presentation/screens/widgets/gradient_button.dart';
+import 'package:spa_booking_app/features/cart/presentation/screens/cart_screen.dart';
+import 'package:spa_booking_app/core/common_widgets/gradients/GradientBoxBorder.dart';
+import 'package:spa_booking_app/core/common_widgets/gradients/gradeint_circle.dart';
+import 'package:spa_booking_app/core/common_widgets/dotted_line.dart';
+import 'package:spa_booking_app/core/common_widgets/gradient_button.dart';
 
 
 class SpaDetailScreen extends StatefulWidget {
@@ -109,23 +111,30 @@ class _SpaDetailScreenState extends State<SpaDetailScreen> {
     return Positioned(
       top: 40,
       left: 16,
-      child: Container(
-      
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          gradient:  LinearGradient(
-                begin: Alignment.centerLeft,
-                colors: [
-                  AppColors.secondaryGradient.withOpacity(.3),
-                  AppColors.secondaryGradient.withOpacity(.3),
-                 // AppColors.primaryGradient.withOpacity(.8),
-                ],
-              )),
-        child: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new,color: Colors.black,),
-          onPressed: () => Navigator.pop(context),
+      child: GestureDetector(
+      onTap:  () => Navigator.pop(context),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Container(
+            height: 48,
+            width: 48,
+            decoration: BoxDecoration(
+              color: const Color(0xCCD6CDBE), 
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: const Center(
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                size: 22,
+                color: Colors.black,
+              ),
+            ),
+          ),
         ),
       ),
+    ),
     );
   }
 

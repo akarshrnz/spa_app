@@ -5,8 +5,8 @@ import 'package:spa_booking_app/core/app_image.dart';
 import 'package:spa_booking_app/core/theme/app_colors.dart';
 import 'package:spa_booking_app/core/theme/app_text_styles.dart';
 import 'package:spa_booking_app/features/location_permission/presentation/bloc/location_permission_bloc.dart';
-import 'package:spa_booking_app/features/home/presentation/screens/widgets/gradient_button.dart';
-import 'package:spa_booking_app/features/home/presentation/screens/home_screen.dart';
+import 'package:spa_booking_app/core/common_widgets/gradient_button.dart';
+import 'package:spa_booking_app/features/spa/presentation/screens/home_screen.dart';
 
 
 

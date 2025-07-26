@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spa_booking_app/core/app_image.dart';
 import 'package:spa_booking_app/core/theme/app_colors.dart';
 import 'package:spa_booking_app/core/theme/app_text_styles.dart';
-import 'package:spa_booking_app/features/home/presentation/screens/spa_detail_screen.dart';
+import 'package:spa_booking_app/features/spa/presentation/screens/spa_detail_screen.dart';
+import 'package:spa_booking_app/features/spa/presentation/screens/widgets/loaction_selector.dart';
 
 class HomeScreen
     extends
@@ -40,23 +41,24 @@ class HomeScreen
         ),
         child: Row(
           children: [
-            const Icon(
-              Icons.location_on_outlined,
-              color: AppColors.chipSelected,
-            ),
-            const SizedBox(
-              width: 4,
-            ),
-            Text(
-              'Madhapur',
-              style: AppTextStyles.body.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const Icon(
-              Icons.keyboard_arrow_down_rounded,
-              color: AppColors.secondary,
-            ),
+            LocationSelector(),
+            // const Icon(
+            //   Icons.location_on_outlined,
+            //   color: AppColors.chipSelected,
+            // ),
+            // const SizedBox(
+            //   width: 4,
+            // ),
+            // Text(
+            //   'Madhapur',
+            //   style: AppTextStyles.body.copyWith(
+            //     fontWeight: FontWeight.w600,
+            //   ),
+            // ),
+            // const Icon(
+            //   Icons.keyboard_arrow_down_rounded,
+            //   color: AppColors.secondary,
+            // ),
             const Spacer(),
             Container(
               padding: const EdgeInsets.all(
